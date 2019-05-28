@@ -38,7 +38,6 @@ namespace Mirror
         }
         public bool isLocalPlayer { get; private set; }
         public bool hasAuthority { get; private set; }
-		public bool skipAuthority { get; private set; }
 
         // <connectionId, NetworkConnection>
         // null until OnStartServer was called. this is necessary for SendTo...
@@ -51,6 +50,7 @@ namespace Mirror
         public bool serverOnly;
         [FormerlySerializedAs("m_LocalPlayerAuthority")]
         public bool localPlayerAuthority;
+        public bool skipAuthority;
         public NetworkConnection clientAuthorityOwner { get; internal set; }
         public NetworkConnection connectionToServer { get; internal set; }
         public NetworkConnection connectionToClient { get; internal set; }
