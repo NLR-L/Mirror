@@ -95,6 +95,7 @@ namespace Mirror
         }
 
         public bool IsDirty => changes.Count > 0;
+		public void SetAsServer() => IsReadOnly = false;
 
         // throw away all the changes
         // this should be called after a successfull sync
