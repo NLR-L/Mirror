@@ -81,7 +81,17 @@ namespace Mirror
         /// <para>This value is determined at runtime. For most objects, authority is held by the server.</para>
         /// <para>For objects that had their authority set by AssignClientAuthority on the server, this will be true on the client that owns the object. NOT on other clients.</para>
         /// </summary>
-        public bool hasAuthority { get; internal set; }
+        private bool _hasAuthority;
+        public bool hasAuthority
+        {
+            get { return _hasAuthority || skipAuthority; }
+            internal set { _hasAuthority = value; }
+        }
+
+        /// <summary>
+        /// This allows the client to execute commands on objects it doesn't own, if the client AND the server both have this flag set for the object
+        /// </summary>
+        public bool skipAuthority;
 
         /// <summary>
         /// The set of network connections (players) that can see this object.
