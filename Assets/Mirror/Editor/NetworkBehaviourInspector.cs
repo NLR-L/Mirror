@@ -27,8 +27,12 @@ namespace Mirror
             // has OnSerialize that is not in NetworkBehaviour?
             // then it either has a syncvar or custom OnSerialize. either way
             // this means we have something to sync.
-            MethodInfo method = scriptClass.GetMethod("OnSerialize");
-            if (method != null && method.DeclaringType != typeof(NetworkBehaviour))
+            MethodInfo methodInfo = scriptClass.GetMethods().Where(
+                method =>
+                    method.Name.Equals("OnSerialize", StringComparison.OrdinalIgnoreCase) &&
+                    method.DeclaringType != typeof(NetworkBehaviour)).FirstOrDefault();
+
+            if (methodInfo != null)
             {
                 return true;
             }
